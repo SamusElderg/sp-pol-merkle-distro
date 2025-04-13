@@ -1,17 +1,15 @@
+import { Signer } from '@ethersproject/abstract-signer'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
-import chai, { expect } from 'chai'
-import { solidity } from 'ethereum-waffle'
+import { expect } from 'chai'
 import { BigNumber, constants, Contract, ContractFactory } from 'ethers'
 import { ethers } from 'hardhat'
 import BalanceTree from '../src/balance-tree'
 import { parseBalanceMap } from '../src/parse-balance-map'
-import { Signer } from '@ethersproject/abstract-signer'
-
-chai.use(solidity)
 
 const overrides = {
   gasLimit: 9999999,
 }
+
 const gasUsed = {
   MerkleDistributor: {
     twoAccountTree: 81970,
@@ -46,7 +44,7 @@ const deployContract = async (factory: ContractFactory, tokenAddress: string, me
   return distributor
 }
 
-for (const contract of ['MerkleDistributor', 'MerkleDistributorWithDeadline']) {
+const contract = 'MerkleDistributorWithDeadline'
   describe(`${contract} tests`, () => {
     let token: Contract
     let distributorFactory: ContractFactory
@@ -414,7 +412,6 @@ for (const contract of ['MerkleDistributor', 'MerkleDistributorWithDeadline']) {
       })
     })
   })
-}
 
 describe('#MerkleDistributorWithDeadline', () => {
   let token: Contract

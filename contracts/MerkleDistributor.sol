@@ -41,6 +41,7 @@ contract MerkleDistributor is IMerkleDistributor {
         virtual
         override
     {
+        if (msg.sender != account) revert("Caller is not the account owner");
         if (isClaimed(index)) revert AlreadyClaimed();
 
         // Verify the merkle proof.
